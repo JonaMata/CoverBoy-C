@@ -14,6 +14,6 @@ RUN install_packages make gcc g++ cmake clang llvm
 COPY ./ ./
 
 # Install and build
-RUN make coverboy
+RUN make main
 
 CMD exit 0
