@@ -14,8 +14,6 @@ RUN install_packages make gcc g++ cmake clang llvm
 COPY ./ ./
 
 # Install and build
-RUN cmake .
-RUN cmake -S . -B /build
-RUN cmake --build /build --target CoverBoy_C -j 10
+RUN make coverboy
 
 CMD exit 0
