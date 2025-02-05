@@ -13,7 +13,4 @@ RUN install_packages make gcc g++ cmake clang llvm
 # Copy all the things
 COPY ./ ./
 
-# Install and build
-ENTRYPOINT ["make", "main"]
-
 CMD exit 0
