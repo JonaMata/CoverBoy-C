@@ -18,12 +18,10 @@ jobs:
           submodules: "recursive"
       - name: Install ARMv6 binfmt
         run: docker run --privileged --rm tonistiigi/binfmt --install arm
-      - name: Create build image for Raspberry Pi Zero
-        run: docker build --platform linux/arm/v6 --file Dockerfile --tag raspberry-pi-zero:$(date +%s) .
       - name: Create build directory
         run: mkdir -p build
       - name: Build the for Raspberry Pi Zero
-        run: docker run --rm -v ./build:/build raspberry-pi-zero:$(date +%s)
+        run: docker run --rm -v ./build:/build $(docker build --platform linux/arm/v6 --file Dockerfile -q .)
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
