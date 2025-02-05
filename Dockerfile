@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi-debian:build
+FROM balenalib/raspberry-pi-debian:build
 
 # Turn on devices
 ENV UDEV=1
