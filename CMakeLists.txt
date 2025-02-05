@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18)
 project(CoverBoy_C)
 
-set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR arm)
