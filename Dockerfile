@@ -8,7 +8,7 @@ RUN mkdir /build
 WORKDIR /app
 
 # Install python and other native module dependencies
-RUN apk add --no-cache make gcc g++ cmake
+# RUN apk add --no-cache make gcc g++ cmake
 
 # Copy all the things
 COPY ./ ./
