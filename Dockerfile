@@ -8,7 +8,7 @@ RUN mkdir /build
 WORKDIR /app
 
 # Install python and other native module dependencies
-RUN install_packages make gcc g++ cmake
+RUN install_packages make gcc g++ cmake clang llvm
 
 # Copy all the things
 COPY ./ ./
