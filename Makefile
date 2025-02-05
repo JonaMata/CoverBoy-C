@@ -9,7 +9,7 @@ $(RGB_LIBRARY):
 	$(MAKE) -C $(RGB_LIBDIR)
 
 main: main.o $(RGB_LIBRARY)
-	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $< -o /build/$@ $(LDFLAGS)
 
 main.o: main.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
