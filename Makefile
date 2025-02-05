@@ -13,5 +13,5 @@ $(RGB_LIBRARY):
 coverboy: $(OBJECTS) $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $@ $(LDFLAGS)
 
-coverboy.o: coverboy.cpp
-	$(CXX) $(CXXFLAGS) -I$(RGB_INCDIR) -c coverboy.cpp
+coverboy.o: main.cpp
+	$(CXX) $(CXXFLAGS) -I$(RGB_INCDIR) -c main.cpp
