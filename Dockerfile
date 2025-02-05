@@ -14,6 +14,7 @@ RUN install_packages make gcc g++ cmake
 COPY ./ ./
 
 # Install and build
+RUN cmake .
 RUN cmake --build /build --target CoverBoy_C -j 10
 
 CMD exit 0
