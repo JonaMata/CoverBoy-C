@@ -21,7 +21,7 @@ jobs:
       - name: Create build directory
         run: mkdir -p build
       - name: Build the for Raspberry Pi Zero
-        run: docker run --rm -v ./build:/build $(docker build --platform linux/arm/v6 --file Dockerfile -q .)
+        run: docker run --platform linux/arm/v6 --rm -v ./build:/build $(docker build --platform linux/arm/v6 --file Dockerfile -q .)
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
