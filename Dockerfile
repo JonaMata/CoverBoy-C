@@ -15,6 +15,7 @@ COPY ./ ./
 
 # Install and build
 RUN cmake .
+cmake -S . -B /build
 RUN cmake --build /build --target CoverBoy_C -j 10
 
 CMD exit 0
