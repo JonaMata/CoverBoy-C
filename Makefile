@@ -8,8 +8,8 @@ LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread
 $(RGB_LIBRARY):
 	$(MAKE) -C $(RGB_LIBDIR)
 
-coverboy: coverboy.o $(RGB_LIBRARY)
-	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $@ $(LDFLAGS)
+main: main.o $(RGB_LIBRARY)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
-coverboy.o: main.cpp
-	$(CXX) $(CXXFLAGS) -I$(RGB_INCDIR) -c main.cpp
+main.o: main.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
