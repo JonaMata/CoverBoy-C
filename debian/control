@@ -1,0 +1,11 @@
+Source: coverboy
+Maintainer: Jonathan Matarazzi <git@jonathanm.nl>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Section: utils
+
+Package: coverboy
+Priority: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A tool to show album covers on a Raspberry Pi led matrix

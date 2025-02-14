@@ -1,3 +1,9 @@
 [submodule "rpi-rgb-led-matrix"]
 	path = rpi-rgb-led-matrix
 	url = https://github.com/hzeller/rpi-rgb-led-matrix
+[submodule "easywsclient"]
+	path = easywsclient
+	url = https://github.com/dhbaird/easywsclient.git
+[submodule "CImg"]
+	path = CImg
+	url = https://github.com/GreycLab/CImg.git
