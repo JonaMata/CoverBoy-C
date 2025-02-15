@@ -1,6 +1,6 @@
 [Unit]
 Description=CoverBoy Service
-After=network.target
+After=network-online.target
 
 [Service]
 ExecStart=/usr/bin/coverboy
@@ -10,4 +10,4 @@ Restart=always
 
 [Install]
 WantedBy=default.target
-RequiredBy=network.target
+RequiredBy=network-online.target
