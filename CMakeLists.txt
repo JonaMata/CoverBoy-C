@@ -80,8 +80,8 @@ add_custom_target(rgb_matrix_library ALL
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/rpi-rgb-led-matrix
 )
 
-add_library(rgb_matrix SHARED IMPORTED)
-set_target_properties(rgb_matrix PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/rpi-rgb-led-matrix/lib/librgbmatrix.so.1)
+add_library(rgb_matrix STATIC IMPORTED)
+set_target_properties(rgb_matrix PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/rpi-rgb-led-matrix/lib/librgbmatrix.a)
 
 add_executable(coverboy src/main.cpp)
 target_link_libraries(coverboy INTERFACE ${SYSTEM_LIBS} Boost::json)

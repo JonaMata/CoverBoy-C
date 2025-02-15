@@ -1,13 +1,13 @@
-#include "easywsclient/easywsclient.hpp"
-#include "easywsclient/easywsclient.cpp" // <-- include only if you don't want compile separately
+#include "../easywsclient/easywsclient.hpp"
+#include "../easywsclient/easywsclient.cpp" // <-- include only if you don't want compile separately
 #define cimg_display 0
-#include "CImg/CImg.h"
+#include "../CImg/CImg.h"
 #include <cassert>
 #include <boost/json/src.hpp>
 #include <string>
 #include <chrono>
 #include <csignal>
-#include "rpi-rgb-led-matrix/include/led-matrix.h"
+#include "../rpi-rgb-led-matrix/include/led-matrix.h"
 
 using namespace boost;
 using namespace cimg_library;

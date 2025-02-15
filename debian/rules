@@ -1,5 +1,3 @@
 #!/usr/bin/make -f
 %:
-	dh $@/build
-override_dh_auto_install:
-	install -D -m 0755 coverboy $$(pwd)/debian/helloworld/usr/local/bin/coverboy
+	dh $@ --builddirectory=build
