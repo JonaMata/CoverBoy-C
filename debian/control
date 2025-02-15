@@ -8,4 +8,5 @@ Package: coverboy
 Priority: extra
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: A tool to show album covers on a Raspberry Pi led matrix
+Description: a tool to display album covers
+    A tool to display album covers on a Raspberry Pi connected to a 64x64 RGB LED matrix.
