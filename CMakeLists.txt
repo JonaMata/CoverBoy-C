@@ -75,7 +75,7 @@ if (NOT WIN32)
     SET( SYSTEM_LIBS ${SYSTEM_LIBS} ${CMAKE_THREAD_LIBS_INIT} )
 endif()
 
-add_custom_target(rgb_matrix_library ALL
+add_custom_target(librgmatrix.a ALL
         COMMAND make -C lib
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/rpi-rgb-led-matrix
 )
