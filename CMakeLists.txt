@@ -89,7 +89,7 @@ add_library(rgb_matrix STATIC IMPORTED)
 set_target_properties(rgb_matrix PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/rpi-rgb-led-matrix/lib/librgbmatrix.a)
 
 add_executable(coverboy src/main.cpp)
-target_link_libraries(coverboy INTERFACE ${SYSTEM_LIBS} Boost::json)
+target_link_libraries(coverboy INTERFACE ${SYSTEM_LIBS} Boost::json Boost::Container)
 target_link_libraries(coverboy PRIVATE rgb_matrix)
 add_dependencies(coverboy rgb_matrix_library)
 

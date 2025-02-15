@@ -3,7 +3,7 @@
 #define cimg_display 0
 #include "../CImg/CImg.h"
 #include <cassert>
-#include <boost/json/src.hpp>
+#include <boost/json.hpp>
 #include <string>
 #include <chrono>
 #include <csignal>
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
     matrix = RGBMatrix::CreateFromFlags(&argc, &argv, &defaults);
     if (matrix == nullptr)
         return 1;
-
+    matrix->SetBrightness(50);
     signal(SIGTERM, InterruptHandler);
     signal(SIGINT, InterruptHandler);
     while (!interrupt_received && retries < 5) {
