@@ -4,7 +4,7 @@ project(coverboy)
 set(CMAKE_CXX_STANDARD 20)
 # === boost ===
 #find_package(Boost REQUIRED COMPONENTS filesystem system thread regex)
-find_package(Boost REQUIRED CONFIG)
+find_package(Boost 1.75 REQUIRED CONFIG)
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR}/CImg)
 include_directories(${PROJECT_SOURCE_DIR}/easywsclient)
