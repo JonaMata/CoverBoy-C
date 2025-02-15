@@ -1,3 +1,4 @@
+make -C rpi-rgb-led-matrix/lib
 cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 debuild -uc -us -b
 mkdir deb
