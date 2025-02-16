@@ -16,11 +16,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: "recursive"
-      - name: Install ARMv6 binfmt
-        run: docker run --privileged --rm tonistiigi/binfmt --install arm
       - name: Build the for Raspberry Pi Zero
-        run: docker run --platform linux/arm/v6 --rm -v ./:/app $(docker build --platform linux/arm/v6 --file Dockerfile -q .) /bin/sh build.sh
+        run: ./dockcross /bin/bash -c "./build.sh"
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: deb/
+          path: build/

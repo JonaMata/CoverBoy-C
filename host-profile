@@ -1,0 +1,14 @@
+[settings]
+arch=armv6
+build_type=Release
+compiler=gcc
+compiler.cppstd=gnu17
+compiler.libcxx=libstdc++11
+compiler.version=11
+os=Linux
+
+
+[buildenv]
+CC=armv6-unknown-linux-gnueabihf-gcc
+CXX=armv6-unknown-linux-gnueabihf-g++
+LD=armv6-unknown-linux-gnueabihf-ld

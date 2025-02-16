@@ -1,9 +1,9 @@
 #include "../easywsclient/easywsclient.hpp"
 #include "../easywsclient/easywsclient.cpp" // <-- include only if you don't want compile separately
 #define cimg_display 0
-#include "../CImg/CImg.h"
+#include <CImg.h>
 #include <cassert>
-#include <boost/json.hpp>
+#include <boost/json/src.hpp>
 #include <string>
 #include <chrono>
 #include <csignal>

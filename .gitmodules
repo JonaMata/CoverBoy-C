@@ -4,6 +4,3 @@
 [submodule "easywsclient"]
 	path = easywsclient
 	url = https://github.com/dhbaird/easywsclient.git
-[submodule "CImg"]
-	path = CImg
-	url = https://github.com/GreycLab/CImg.git
