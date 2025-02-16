@@ -110,11 +110,11 @@ int main(int argc, char *argv[])
         printf("Using local coverboy.conf\n");
     } else {
         confFile.close();
-        delete confFile;
-        std::ifstream confFile("/etc/coverboy.conf");
+        confFile = std::ifstream("/etc/coverboy.conf");
         if (!confFile.good()) {
             printf("No local or system coverboy.conf found.\n");
             return 1;
+        }
         printf("Using system configuration from /etc/coverboy.conf\n");
     }
     std::string line;
