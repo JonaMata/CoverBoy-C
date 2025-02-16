@@ -14,6 +14,8 @@ RUNAS=root
 PIDFILE=/var/run/covebroy.pid
 LOGFILE=/var/log/coverboy.log
 
+. /lib/lsb/init-functions
+
 start() {
   if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
     echo 'Service already running' >&2

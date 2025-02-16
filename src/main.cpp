@@ -7,6 +7,7 @@
 #include <string>
 #include <chrono>
 #include <csignal>
+#include <fstream>
 #include "../rpi-rgb-led-matrix/include/led-matrix.h"
 
 using namespace boost;
@@ -27,7 +28,9 @@ int retries = 0;
 std::string current_song;
 std::chrono::steady_clock::time_point last_update = std::chrono::steady_clock::now();
 
-std::string access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkODliOWU4NzgyOWU0MjM2YjYxNDQ3ZTcwY2ZlYTdiOCIsImlhdCI6MTczODUxMzE3NCwiZXhwIjoyMDUzODczMTc0fQ.Jr6TD93QhfHSyrFPckuIyZUJldSb4tXOE1JrTbKKpAU";
+std::string access_token;
+std::string ha_url;
+std::string ws_url;
 
 void handle_message(const std::string & message)
 {
@@ -50,7 +53,7 @@ void handle_message(const std::string & message)
                                 return;
                             }
                             printf("Playing: %s - %s\n", attr.at("media_artist").as_string().c_str(), attr.at("media_title").as_string().c_str());
-                            std::string cover_url = "http://sweetchili:8123";
+                            std::string cover_url = ha_url;
                             if (attr.as_object().if_contains("entity_picture_local")) {
                                 cover_url += attr.at("entity_picture_local").as_string().c_str();
                             } else if (attr.as_object().if_contains("entity_picture")) {
@@ -85,7 +88,7 @@ void handle_message(const std::string & message)
 }
 
 void start_ws() {
-    ws = WebSocket::from_url("ws://sweetchili:8123/api/websocket");
+    ws = WebSocket::from_url(ws_url);
     assert(ws);
     while (ws->getReadyState() != WebSocket::CLOSED) {
         if (interrupt_received) {
@@ -102,6 +105,51 @@ void start_ws() {
 
 int main(int argc, char *argv[])
 {
+    std::ifstream confFile("coverboy.conf");
+    if (confFile.good()) {
+        printf("Using local coverboy.conf\n");
+    } else {
+        confFile.close();
+        delete confFile;
+        std::ifstream confFile("/etc/coverboy.conf");
+        if (!confFile.good()) {
+            printf("No local or system coverboy.conf found.\n");
+            return 1;
+        printf("Using system configuration from /etc/coverboy.conf\n");
+    }
+    std::string line;
+    while (getline(confFile, line)) {
+        std::istringstream is_line(line);
+        std::string key;
+        if( std::getline(is_line, key, '=') )
+        {
+            std::string value;
+            if( std::getline(is_line, value) ) {
+                value = value.substr(1, value.size() - 2);
+                if (key == "HA_URL") {
+                    ha_url = value;
+                    unsigned long start = value.find("://");
+                    if (start == std::string::npos) {
+                        start = 0;
+                    } else {
+                        start += 3;
+                    }
+
+                    ws_url = "ws://" + value.substr(start) + "/api/websocket";
+                } else if (key == "HA_TOKEN") {
+                    access_token = value;
+                }
+            }
+        }
+    }
+    if (ha_url.empty() || access_token.empty()) {
+        printf("Configuration file not found or invalid\n");
+        return 1;
+    }
+
+    printf("Starting websocket to %s\n", ws_url.c_str());
+    printf("Using access token %s\n", access_token.c_str());
+
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
     defaults.rows = 64;

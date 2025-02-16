@@ -5,8 +5,8 @@ Standards-Version: 3.9.3
 Section: utils
 
 Package: coverboy
-Priority: extra
+Priority: optional
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: a tool to display album covers
-    A tool to display album covers on a Raspberry Pi connected to a 64x64 RGB LED matrix.
+Description: Album cover display
+ Display album covers on a RasPi connected to a 64x64 RGB LED matrix.
