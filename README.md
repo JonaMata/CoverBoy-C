@@ -19,14 +19,6 @@ For good performance, the sound module of the Raspberry Pi should be disabled by
 CoverBoy will look for a `coverboy.conf` configuration file.
 It will first look in the same directory as the executable, then in `/etc/coverboy.conf`.
 
-## Usage
-If you used the `.deb` package, the service `coverboy` will be started and enabled automatically.
-You can start, stop, and restart the service with `sudo systemctl start coverboy`, `sudo systemctl stop coverboy`, and `sudo systemctl restart coverboy` respectively.
-If you don't want CoverBoy to start automatically, you can disable the service with `sudo systemctl disable coverboy`.
-
-If you only downloaded the executable, you can start CoverBoy with `./coverboy`. Make sure to have a correct `coverboy.conf` in the same directory or in `/etc/coverboy.conf`.
-
-## Configration
 The configuration file is a simple key-value file and looks like this:
 ```sh
 # Configuration file for CoverBoy
@@ -34,7 +26,14 @@ HA_URL="https://homeassistant.local:8123"
 HA_TOKEN="long_lived_access_token"
 ```
 
-## Building
+## Usage
+If you used the `.deb` package, the service `coverboy` will be started and enabled automatically.
+You can start, stop, and restart the service with `sudo systemctl start coverboy`, `sudo systemctl stop coverboy`, and `sudo systemctl restart coverboy` respectively.
+If you don't want CoverBoy to start automatically, you can disable the service with `sudo systemctl disable coverboy`.
+
+If you only downloaded the executable, you can start CoverBoy with `./coverboy`. Make sure to have a correct `coverboy.conf` in the same directory or in `/etc/coverboy.conf`.
+
+## Building from source
 CoverBoy uses [Conan](https://conan.io/) for dependency management, [CMake](https://cmake.org/) for building and `debuild` for packaging.
 CoverBoy uses [DockCross]() as a cross-compile environment for the Raspberry Pi.
 To build and package CoverBoy simply run `./dockcross /bin/bash -c "./build.sh"`.
