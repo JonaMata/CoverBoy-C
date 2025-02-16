@@ -5,6 +5,8 @@ name: Build - Raspberry Pi Zero
 on:
   push:
     branches: [main]
+    tags:
+      - v*.*.*
   pull_request:
     branches: [main]
 
@@ -18,11 +20,43 @@ jobs:
           submodules: "recursive"
       - name: Build the for Raspberry Pi Zero
         run: ./dockcross /bin/bash -c "./build.sh"
+      - name: Check version
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        run: |
+          echo "TAG_VERSION=$(echo $GITHUB_REF | sed 's#.*/v##')" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$(name=$(basename build/coverboy_*_armhf.deb); vers=${name#*_}; vers=${vers%_*}; echo $vers)" >> $GITHUB_ENV
       - name: Upload .deb artifact
         uses: actions/upload-artifact@v4
         with:
+          name: deb
           path: build/coverboy_*.deb
-      - name: Upload executable artifact
+      - name: Upload .deb artifact
         uses: actions/upload-artifact@v4
         with:
+          name: exec
           path: build/coverboy
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment: release
+    permissions:
+      id-token: write
+      contents: write
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && needs.build.outputs.tag_version == needs.build.outputs.package_version
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: deb
+          path: ./dist/
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: exec
+          path: ./dist/
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./dist/*
+          generate_release_notes: True
