@@ -18,7 +18,11 @@ jobs:
           submodules: "recursive"
       - name: Build the for Raspberry Pi Zero
         run: ./dockcross /bin/bash -c "./build.sh"
-      - name: Upload build artifacts
+      - name: Upload .deb artifact
         uses: actions/upload-artifact@v4
         with:
-          path: build/
+          path: build/coverboy_*.deb
+      - name: Upload executable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/coverboy
