@@ -1,6 +1,8 @@
 #include "../easywsclient/easywsclient.hpp"
 #include "../easywsclient/easywsclient.cpp" // <-- include only if you don't want compile separately
 #define cimg_display 0
+#define cimg_use_jpeg
+#define cimg_use_png
 #include <CImg.h>
 #include <cassert>
 #include <boost/json/src.hpp>
@@ -135,7 +137,12 @@ int main(int argc, char *argv[])
                         start += 3;
                     }
 
-                    ws_url = "ws://" + value.substr(start) + "/api/websocket";
+                    std::string protocol = "ws://";
+                    if value.starts_with("https://") {
+                        protocol = "wss://";
+                    }
+
+                    ws_url = protocol + value.substr(start) + "/api/websocket";
                 } else if (key == "HA_TOKEN") {
                     access_token = value;
                 }
