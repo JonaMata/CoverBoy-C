@@ -27,16 +27,11 @@ jobs:
         run: |
           echo "TAG_VERSION=$(echo $GITHUB_REF | sed 's#.*/v##')" >> $GITHUB_ENV
           echo "PACKAGE_VERSION=$(name=$(basename build/coverboy_*_armhf.deb); vers=${name#*_}; vers=${vers%_*}; echo $vers)" >> $GITHUB_ENV
-      - name: Upload .deb artifact
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: deb
-          path: build/coverboy_*.deb
-      - name: Upload .deb artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: exec
-          path: build/coverboy
+          name: build
+          path: build/*
 
   release:
     runs-on: ubuntu-latest
@@ -47,18 +42,13 @@ jobs:
       contents: write
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && needs.build.outputs.tag_version == needs.build.outputs.package_version
     steps:
-      - name: Download a Build Artifact
+      - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: deb
-          path: ./dist/
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: exec
+          name: build
           path: ./dist/
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./dist/*
+          files: ./dist/build/*
           generate_release_notes: True
