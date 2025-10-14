@@ -18,8 +18,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: "recursive"
-      - name: Build the for Raspberry Pi Zero
-        run: ./dockcross /bin/bash -c "./build.sh"
+      - name: Build for Raspberry Pi Zero
+        run: ./dockcross-armv6 /bin/bash -c "./build-armv6.sh"
+      - name: Build for arm64 Raspberry Pi
+        run: ./dockcross-arm64 /bin/bash -c "./build-arm64.sh"
       - name: Check version
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
         run: |

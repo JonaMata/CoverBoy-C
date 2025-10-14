@@ -2,4 +2,10 @@
 %:
 	dh $@
 override_dh_shlibdeps:
+ifeq ($(DEB_HOST_ARCH),armhf)
 	dh_shlibdeps -- --ignore-missing-info -l/usr/xcc/armv6-unknown-linux-gnueabihf/armv6-unknown-linux-gnueabihf/sysroot/lib/
+else ifeq ($(DEB_HOST_ARCH),arm64)
+	dh_shlibdeps -- --ignore-missing-info -l/usr/xcc/aarch64-unknown-linux-gnu/aarch64-unknown-linux-gnu/sysroot/lib/
+else
+	dh_shlibdeps -- --ignore-missing-info
+endif
